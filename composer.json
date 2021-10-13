@@ -1,0 +1,30 @@
+{
+    "name": "lswl/laravel-support",
+    "description": "Laravel Support.",
+    "keywords": [
+        "lswl",
+        "laravel",
+        "support"
+    ],
+    "homepage": "https://linshaowl.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "linshaowl",
+            "email": "linshaowl@163.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lswl\\Support\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^7.3|^8.0",
+        "ext-json": "*",
+        "ext-redis": "*",
+        "ext-mbstring": "*",
+        "laravel/framework": "^8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}
