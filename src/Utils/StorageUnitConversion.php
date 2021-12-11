@@ -60,4 +60,23 @@ class StorageUnitConversion
 
         return $num * pow(1024, $pos);
     }
+
+    /**
+     * 字节转字符串
+     * @param int $size
+     * @param bool $isUpper
+     * @return string
+     */
+    public static function byte2str(int $size, bool $isUpper = true): string
+    {
+        // 次数
+        $num = count(static::$unitArr) - 1;
+        for ($i = 0; $size >= 1024 && $i < $num; $i++) {
+            $size /= 1024;
+        }
+
+        // 单位
+        $unit = static::$unitArr[$i];
+        return round($size, 2) . ($isUpper ? strtoupper($unit) : $unit);
+    }
 }

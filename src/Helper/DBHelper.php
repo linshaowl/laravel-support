@@ -47,12 +47,12 @@ class DBHelper
     }
 
     /**
-     * 修改表注释
+     * 在指定表执行SQL语句返回值
      * @param string $table
-     * @param string $comment
+     * @param string $sql
      * @return bool
      */
-    public function comment(string $table, string $comment): bool
+    public function statement(string $table, string $sql): bool
     {
         try {
             // 判断是否存在前缀
@@ -60,14 +60,28 @@ class DBHelper
                 $table = $this->prefix . $table;
             }
 
-            // 设置备注
-            $res = $this->connection->statement(sprintf('ALTER TABLE `%s` COMMENT = "%s"', $table, $comment));
+            // 替换表名
+            $sql = str_replace('{{ table }}', $table, $sql);
+
+            // 运行SQL
+            $res = $this->connection->statement($sql);
 
             return !!$res;
         } catch (Throwable $e) {
         }
 
         return false;
+    }
+
+    /**
+     * 修改表注释
+     * @param string $table
+     * @param string $comment
+     * @return bool
+     */
+    public function comment(string $table, string $comment): bool
+    {
+        return $this->statement($table, sprintf('ALTER TABLE `{{ table }}` COMMENT = "%s"', $comment));
     }
 
     /**

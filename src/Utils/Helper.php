@@ -11,7 +11,6 @@ namespace Lswl\Support\Utils;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Env;
 
 /**
  * 辅助
@@ -119,23 +118,5 @@ class Helper
         }
 
         return Container::getInstance()->get($id);
-    }
-
-    /**
-     * 获取环境变量,第一个不存在使用第二个
-     * @param string $local
-     * @param string $product
-     * @param null $default
-     * @return mixed
-     */
-    public static function getEnv(string $local, string $product, $default = null)
-    {
-        $res = Env::get($local);
-
-        if (!isset($res)) {
-            $res = Env::get($product, $default);
-        }
-
-        return $res;
     }
 }
